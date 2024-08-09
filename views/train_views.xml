@@ -1,0 +1,263 @@
+<odoo>
+
+    <!-- Membuat View Tree/List Train City --> 
+
+    <record id="view_train_city_tree" model="ir.ui.view">
+        <field name="name">train.city.tree</field>
+        <field name="model">train.city</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Membuat View Form Train City --> 
+
+    <record id="view_train_city_form" model="ir.ui.view">
+        <field name="name">train.city.form</field>
+        <field name="model">train.city</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="code"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Membuat View Search View Train City  -->
+
+    <record id="view_train_city_search" model="ir.ui.view">
+        <field name="name">train.city.search</field>
+        <field name="model">train.city</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Membuat View Tree/List Train Station -->
+
+    <record id="view_train_station_tree" model="ir.ui.view">
+        <field name="name">train.station.tree</field>
+        <field name="model">train.station</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="city_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Membuat View Form Train Station -->
+
+    <record id="view_train_station_form" model="ir.ui.view">
+        <field name="name">train.station.form</field>
+        <field name="model">train.station</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="city_id"/>
+                    <field name="address"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Membuat View Tree/List Train -->
+
+    <record id="view_train_train_tree" model="ir.ui.view">
+        <field name="name">train.train.tree</field>
+        <field name="model">train.train</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="capacity"/>
+                <field name="state"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Membuat View Form Train -->
+
+    <record id="view_train_train_form" model="ir.ui.view">
+        <field name="name">train.train.form</field>
+        <field name="model">train.train</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="capacity"/>
+                    <field name="state"/>
+                    <field name="active"/>
+                </group>
+                <notebook>
+                    <page string="Schedules">
+                        <field name="schedule_line_ids">
+                            <tree>
+                                <field name="code"/>
+                                <field name="origin"/>
+                                <field name="destination"/>
+                                <field name="schedule_time"/>
+                                <field name="arrival_time"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <!-- Membuat View Tree/List Train Schedule-->
+
+    <record id="view_train_schedule_tree" model="ir.ui.view">
+        <field name="name">train.schedule.tree</field>
+        <field name="model">train.schedule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="origin"/>
+                <field name="destination"/>
+                <field name="schedule_time"/>
+                <field name="arrival_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Membuat View Form Train Schedule-->
+
+    <record id="view_train_schedule_form" model="ir.ui.view">
+        <field name="name">train.schedule.form</field>
+        <field name="model">train.schedule</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="code"/>
+                    <field name="origin"/>
+                    <field name="destination"/>
+                    <field name="schedule_time"/>
+                    <field name="duration"/>
+                    <field name="arrival_time"/>
+                    <field name="train_id"/>
+                    <field name="capacity"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Membuat View Calendar Train Schedule-->
+
+    <record id="view_train_schedule_calendar" model="ir.ui.view">
+        <field name="name">train.schedule.calendar</field>
+        <field name="model">train.schedule</field>
+        <field name="arch" type="xml">
+            <calendar date_start="schedule_time" date_stop="arrival_time" color="train_id">
+                <field name="origin"/>
+                <field name="destination"/>
+                <field name="train_id"/>
+            </calendar>
+        </field>
+    </record>
+
+
+
+    <!-- Membuat Action Menu Bar Train -->
+    <record id="train_action" model="ir.actions.act_window">
+        <field name="name">Train</field>
+        <field name="res_model">train.train</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p name="o_view_nocontent_smiling_face">
+                This view displays the list of trains and their details.
+            </p>
+        </field>
+    </record>
+
+    <!-- Membuat Action Train City -->
+    <record id="action_train_city" model="ir.actions.act_window">
+        <field name="name">Train City</field>
+        <field name="res_model">train.city</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_train_city_tree"/>
+    </record>
+
+    <!-- Membuat Action Station -->
+    <record id="action_train_station" model="ir.actions.act_window">
+        <field name="name">Train Station</field>
+        <field name="res_model">train.station</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_train_station_tree"/>
+    </record>
+
+    <!-- Membuat Action Schedule -->
+    <record id="action_train_schedule" model="ir.actions.act_window">
+        <field name="name">Train Schedule</field>
+        <field name="res_model">train.schedule</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_id" ref="view_train_schedule_tree"/>
+    </record>
+
+    <!-- Membuat Action Train -->
+    <record id="action_train_train" model="ir.actions.act_window">
+        <field name="name">Train</field>
+        <field name="res_model">train.train</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_train_train_tree"/>
+    </record>
+
+    <!-- Membuat Action Passenger -->
+    <record id="action_train_passenger" model="ir.actions.act_window">
+        <field name="name">Passenger</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('train_state', '=', 'passenger')]</field>
+        <field name="context">{'default_train_state': 'passenger'}</field>
+    </record>
+
+    <!-- Membuat Action Machinist -->
+    <record id="action_train_machinist" model="ir.actions.act_window">
+        <field name="name">Machinist</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('train_state', '=', 'machinist')]</field>
+        <field name="context">{'default_train_state': 'machinist'}</field>
+    </record>
+
+
+
+
+
+
+
+    <!-- Membuat Dashboard Menu -->
+    <menuitem id="menu_dashboard_train" name="Train Transportation"/>
+
+    <!-- Membuat Menu Bar Train -->
+    <menuitem id="menu_bar_train" name="Train" parent="menu_dashboard_train" sequence="10"/>
+    <!-- Membuat Menu Bar Configuration -->
+    <menuitem id="menu_bar_config" name="Configuration" parent="menu_dashboard_train" sequence="10"/>
+
+
+    <!-- Membuat Menu Item Train -->
+    <menuitem id="menu_item_train" name="Train" parent="menu_bar_train" action="action_train_train" sequence="10"/>
+    <menuitem id="menu_item_schedule" name="Schedule" parent="menu_bar_train" action="action_train_schedule" sequence="10"/>
+
+    <!-- Membuat Menu Item for Configuration -->
+    <menuitem id="menu_item_city" name="City" parent="menu_bar_config" action="action_train_city" sequence="10"/>
+    <menuitem id="menu_item_station" name="Station" parent="menu_bar_config" action="action_train_station" sequence="10"/>
+    <menuitem id="menu_item_passenger" name="Passenger" parent="menu_bar_config" action="action_train_passenger" sequence="10"/>
+    <menuitem id="menu_item_machinist" name="Machinist" parent="menu_bar_config" action="action_train_machinist" sequence="10"/>
+
+</odoo>
